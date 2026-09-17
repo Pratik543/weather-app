@@ -1,0 +1,153 @@
+@import 'tailwindcss';
+@import '@fontsource-variable/outfit';
+
+@theme {
+  --font-sans: 'Outfit Variable', ui-sans-serif, system-ui, sans-serif;
+  --color-ink: #0b1220;
+  --color-glass: rgb(255 255 255 / 0.08);
+  --color-glass-border: rgb(255 255 255 / 0.14);
+}
+
+html {
+  -webkit-font-smoothing: antialiased;
+}
+
+body {
+  font-family: var(--font-sans);
+  color: white;
+  min-height: 100dvh;
+  background-color: #0b1220;
+}
+
+/* Sky themes — driven by condition group + day/night */
+.sky-clear-day {
+  background:
+    radial-gradient(120% 90% at 85% -10%, #7dd3fc 0%, transparent 55%),
+    radial-gradient(110% 80% at 10% 100%, #fbbf2433 0%, transparent 50%),
+    linear-gradient(180deg, #0369a1 0%, #0c4a6e 60%, #082f49 100%);
+}
+.sky-clear-night {
+  background:
+    radial-gradient(120% 90% at 85% -10%, #1e3a8a55 0%, transparent 55%),
+    linear-gradient(180deg, #020617 0%, #0f172a 60%, #1e1b4b 100%);
+}
+.sky-cloudy-day {
+  background:
+    radial-gradient(120% 90% at 80% -10%, #cbd5e144 0%, transparent 55%),
+    linear-gradient(180deg, #475569 0%, #334155 60%, #1e293b 100%);
+}
+.sky-cloudy-night {
+  background:
+    linear-gradient(180deg, #111827 0%, #1f2937 60%, #111827 100%);
+}
+.sky-overcast {
+  background: linear-gradient(180deg, #374151 0%, #1f2937 60%, #111827 100%);
+}
+.sky-fog {
+  background:
+    radial-gradient(120% 90% at 50% -10%, #94a3b844 0%, transparent 60%),
+    linear-gradient(180deg, #475569 0%, #334155 70%, #1e293b 100%);
+}
+.sky-rain-day {
+  background:
+    radial-gradient(120% 90% at 80% -10%, #38bdf833 0%, transparent 55%),
+    linear-gradient(180deg, #155e75 0%, #164e63 60%, #083344 100%);
+}
+.sky-rain-night {
+  background: linear-gradient(180deg, #082f49 0%, #0c2431 60%, #020617 100%);
+}
+.sky-snow {
+  background:
+    radial-gradient(120% 90% at 80% -10%, #e0f2fe33 0%, transparent 55%),
+    linear-gradient(180deg, #64748b 0%, #475569 60%, #293548 100%);
+}
+.sky-thunder {
+  background:
+    radial-gradient(120% 90% at 70% -10%, #7c3aed44 0%, transparent 55%),
+    linear-gradient(180deg, #1e1b4b 0%, #312e81 55%, #18181b 100%);
+}
+
+.glass {
+  background: var(--color-glass);
+  border: 1px solid var(--color-glass-border);
+  box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.08);
+  backdrop-filter: blur(16px);
+}
+
+@media (prefers-reduced-transparency: reduce) {
+  .glass {
+    backdrop-filter: none;
+    background: rgb(15 23 42 / 0.92);
+  }
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.rise {
+  animation: rise 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
+  animation-delay: calc(var(--i, 0) * 70ms);
+}
+
+@keyframes drift {
+  from {
+    background-position: 0 0;
+  }
+  to {
+    background-position: 400px 0;
+  }
+}
+
+.skeleton {
+  border-radius: 1rem;
+  background:
+    linear-gradient(
+      90deg,
+      rgb(255 255 255 / 0.06) 25%,
+      rgb(255 255 255 / 0.12) 50%,
+      rgb(255 255 255 / 0.06) 75%
+    );
+  background-size: 400px 100%;
+  animation: drift 1.4s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .rise,
+  .skeleton {
+    animation: none;
+  }
+}
+
+::selection {
+  background: #38bdf866;
+}
+
+/* Leaflet dark-theme integration */
+.leaflet-container {
+  background: #0b1220;
+  font-family: var(--font-sans);
+}
+
+.leaflet-bar {
+  border: none !important;
+  box-shadow: 0 4px 16px rgb(0 0 0 / 0.4) !important;
+}
+
+.leaflet-bar a {
+  background: rgb(15 23 42 / 0.85) !important;
+  color: #e2e8f0 !important;
+  border-bottom: 1px solid rgb(255 255 255 / 0.1) !important;
+  backdrop-filter: blur(8px);
+}
+
+.leaflet-bar a:hover {
+  background: rgb(30 41 59 / 0.95) !important;
+}
